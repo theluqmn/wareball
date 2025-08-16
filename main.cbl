@@ -9,7 +9,7 @@
 
        01 ITEM-DATA.
            05 ITEM-ID PIC X(20).
-           05 ITEM-DESCRIPTION PIC X(64)
+           05 ITEM-DESCRIPTION PIC X(64).
            05 ITEM-QUANTITY PIC 9(5).
            05 ITEM-PRICE PIC 9(5)V99.
        
@@ -32,6 +32,8 @@
            DISPLAY "inventory done correctly".
            DISPLAY "".
            DISPLAY "[0] quit program".
+           DISPLAY "".
+           DISPLAY "enter option:"
            ACCEPT MENU-INPUT.
            PERFORM MENU-PROCESS.
 
