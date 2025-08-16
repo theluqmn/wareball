@@ -5,12 +5,15 @@
 
        DATA DIVISION.
        WORKING-STORAGE SECTION.
+       
 
        ENVIRONMENT DIVISION.
        PROCEDURE DIVISION.
 
-      *displaying hello world
-       DISPLAY "Hello, World!".
+       UI-MENU.
+           DISPLAY "wareball".
+
+       PERFORM UI-MENU UNTIL 
 
        STOP RUN.
        END PROGRAM WAREBALL.
