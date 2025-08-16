@@ -1,7 +1,11 @@
       *this is a COBOL program to handle inventory management
        IDENTIFICATION DIVISION.
-       PROGRAM-ID. "WAREBALL".
-       AUTHOR. "theluqmn".
+       PROGRAM-ID. WAREBALL.
+       AUTHOR. theluqmn.
+
+       DATA DIVISION.
+       WORKING-STORAGE SECTION.
+
        ENVIRONMENT DIVISION.
        PROCEDURE DIVISION.
 
