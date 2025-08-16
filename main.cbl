@@ -7,6 +7,19 @@
        WORKING-STORAGE SECTION.
        01 MENU-INPUT PIC X.
 
+       01 ITEM-DATA.
+           05 ITEM-ID PIC X(20).
+           05 ITEM-DESCRIPTION PIC X(64)
+           05 ITEM-QUANTITY PIC 9(5).
+           05 ITEM-PRICE PIC 9(5)V99.
+       
+       01 INVENTORY.
+           05 ITEM-DATA OCCURS 100 TIMES.
+               10 FILLER PIC X(20).
+               10 FILLER PIC X(64).
+               10 FILLER PIC 9(5).
+               10 FILLER PIC 9(5)V99.
+
        PROCEDURE DIVISION.
       *processing the menu input to call functions
        MENU-PROCESS.
