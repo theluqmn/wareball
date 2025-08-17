@@ -25,13 +25,14 @@
 
       *processing the menu input to call functions
        MENU-PROCESS.
-           IF MENU-INPUT = "1"
-               DISPLAY "1".
-               DISPLAY "(1/4) enter ID:".
-               ACCEPT ITEM-ID.
+           IF MENU-INPUT = "0" THEN
+               PERFORM MAIN-END.
+           IF MENU-INPUT = "1" THEN
+               PERFORM OPERATION-ADD.
 
       *display the menu
        MENU-DISPLAY.
+           DISPLAY "------------------------".
            DISPLAY "WAREBALL".
            DISPLAY "inventory done correctly".
            DISPLAY "------------------------".
@@ -45,10 +46,40 @@
            ACCEPT MENU-INPUT.
            PERFORM MENU-PROCESS.
 
+      *operation to add new item
+       OPERATION-ADD.
+           DISPLAY "------------------------".
+           DISPLAY "ADD A NEW ITEM".
+           DISPLAY "------------------------".
+           DISPLAY "(1/4) ID:".
+           ACCEPT ITEM-ID.
+           DISPLAY "(2/4) description:".
+           ACCEPT ITEM-DESCRIPTION.
+           DISPLAY "(3/4) quantity:".
+           ACCEPT ITEM-QUANTITY.
+           DISPLAY "(4/4) price:".
+           ACCEPT ITEM-PRICE.
+       
+       OPERATION-UPDATE.
+           DISPLAY "------------------------".
+           DISPLAY "UPDATE AN ITEM".
+           DISPLAY "------------------------".
+       
+       OPERATION-DELETE.
+           DISPLAY "------------------------".
+           DISPLAY "DELETE AN ITEM".
+           DISPLAY "------------------------".
+       
+       OPERATION-REPORT.
+           DISPLAY "------------------------".
+           DISPLAY "GENERATE A NEW REPORT".
+           DISPLAY "------------------------".
+
       *main program loop
        MAIN-PROCEDURE.
            PERFORM MENU-DISPLAY UNTIL MENU-INPUT = "0".
-           MOVE "O" TO MENU-INPUT.
+       
+       MAIN-END.
            DISPLAY "exiting WAREBALL..."
            STOP RUN.
 
