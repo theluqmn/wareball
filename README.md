@@ -2,9 +2,12 @@
 
 inventory done correctly
 
-**wareball** is designed to be a digital inventory management solution for small business/enterprises (SMEs), built using COBOL.
+**wareball** is designed to be a digital inventory management solution for small business/enterprises (SMEs). powered by the ancient COBOL, and the supremacy of command-line interface.
 
 ## features
+
+> [!NOTE]
+> this project is still a work-in-progress
 
 - [x] user-friendly command line interface
 - [ ] add a new item
@@ -14,8 +17,18 @@ inventory done correctly
 
 ## how to use
 
+> [!WARNING]
+> the release only offers an executable compiled for Ubuntu. if you are not on the same distro or operating system, please clone the repository and compile it yourself using `gnucobol`.
+
+1. go to [releases](https://github.com/theluqmn/wareball/releases), download the latest release.
+2. navigate to the directory of the executable and simply run `./main`.
+
 ## how this works
+
+this program is written in cobol and is compiled using `gnucobol`. it is a simple CLI-based program, which manages item inventory. data is written to a `.dat` file.
 
 ## extras
 
-i started this project to brush up my skills just in case something happens in the future where COBOL programmers will be needed (also for fun), and apply it to an actual functioning project. this project is licensed under the MIT License. it is named wareball cause why not?
+i started this project to brush up my skills just in case something happens in the future where COBOL programmers will be needed (also for fun), and apply it to an actual functioning project. it is named wareball cause why not?
+
+this project is licensed under the [MIT License](https://github.com/theluqmn/wareball/blob/main/LICENSE).
