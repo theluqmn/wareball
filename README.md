@@ -6,7 +6,7 @@ inventory done correctly
 
 ## features
 
-- [ ] user-friendly command line interface
+- [x] user-friendly command line interface
 - [ ] add a new item
 - [ ] update item
 - [ ] delete item

@@ -1,4 +1,3 @@
-      *this is a COBOL program to handle inventory management
        IDENTIFICATION DIVISION.
        PROGRAM-ID. WAREBALL.
        AUTHOR. theluqmn.
@@ -23,26 +22,28 @@
        PROCEDURE DIVISION.
        DISPLAY "------------------------------------------".
        DISPLAY "WAREBALL".
+       DISPLAY " ".
        DISPLAY "inventory done correctly".
        DISPLAY "run 'help' for list of available commands.".
        PERFORM MAIN-PROCEDURE.
 
-      *processing the menu input to call functions
        MENU-PROCESS.
            IF MENU-INPUT = "help" THEN
-               PERFORM MENU-HELP.
-           IF MENU-INPUT = "quit" THEN
-               PERFORM MAIN-END.
-           IF MENU-INPUT = "add" THEN
-               PERFORM OPERATION-ADD.
-           IF MENU-INPUT = "update" THEN
-               PERFORM OPERATION-UPDATE.
-           IF MENU-INPUT = "delete" THEN
-               PERFORM OPERATION-DELETE.
-           IF MENU-INPUT = "report" THEN
-               PERFORM OPERATION-REPORT.
+               PERFORM MENU-HELP
+           ELSE IF MENU-INPUT = "exit" THEN
+               PERFORM MAIN-EXIT
+           ELSE IF MENU-INPUT = "add" THEN
+               PERFORM OPERATION-ADD
+           ELSE IF MENU-INPUT = "update" THEN
+               PERFORM OPERATION-UPDATE
+           ELSE IF MENU-INPUT = "delete" THEN
+               PERFORM OPERATION-DELETE
+           ELSE IF MENU-INPUT = "report" THEN
+               PERFORM OPERATION-REPORT
+           ELSE
+               DISPLAY "[!] unknown command entered."
+           END-IF.
 
-      *display the menu
        MENU-DISPLAY.
            DISPLAY "------------------------------------------".
            ACCEPT MENU-INPUT.
@@ -51,19 +52,18 @@
        MENU-HELP.
            DISPLAY "------------------------------------------".
            DISPLAY "LIST OF COMMANDS".
-           DISPLAY "------------------------------------------".
+           DISPLAY " ".
            DISPLAY "[add]      add an item".
            DISPLAY "[update]   update an item's quantity".
            DISPLAY "[delete]   delete an item".
            DISPLAY "[report]   generate a report".
            DISPLAY "-".
-           DISPLAY "[quit]     quit wareball".
+           DISPLAY "[exit]     exit the wareball CLI".
 
-      *operation to add new item
        OPERATION-ADD.
            DISPLAY "------------------------------------------".
            DISPLAY "ADD A NEW ITEM".
-           DISPLAY "------------------------------------------".
+           DISPLAY " ".
            DISPLAY "(1/4) ID:".
            ACCEPT ITEM-ID.
            DISPLAY "(2/4) description:".
@@ -79,7 +79,7 @@
        OPERATION-UPDATE.
            DISPLAY "------------------------------------------".
            DISPLAY "UPDATE AN ITEM".
-           DISPLAY "------------------------------------------".
+           DISPLAY " ".
            DISPLAY "(1/2) ID:".
            ACCEPT ITEM-ID.
            DISPLAY "(2/2) quantity:".
@@ -91,7 +91,7 @@
        OPERATION-DELETE.
            DISPLAY "------------------------------------------".
            DISPLAY "DELETE AN ITEM".
-           DISPLAY "------------------------------------------".
+           DISPLAY " ".
            DISPLAY "ID:".
            ACCEPT ITEM-ID.
 
@@ -101,14 +101,13 @@
        OPERATION-REPORT.
            DISPLAY "------------------------------------------".
            DISPLAY "GENERATE A NEW REPORT".
-           DISPLAY "------------------------------------------".
+           DISPLAY " ".
 
-      *main program loop
        MAIN-PROCEDURE.
            PERFORM MENU-DISPLAY UNTIL MENU-INPUT = "0".
        
-       MAIN-END.
-           DISPLAY "exiting WAREBALL..."
+       MAIN-EXIT.
+           DISPLAY "[!] exiting WAREBALL..."
            STOP RUN.
 
        END PROGRAM WAREBALL.
