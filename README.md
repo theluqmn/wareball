@@ -7,7 +7,9 @@ inventory done correctly
 ## features
 
 - [ ] user-friendly command line interface
-- [ ] manage inventory records
+- [ ] add a new item
+- [ ] update item
+- [ ] delete item
 - [ ] generate reports
 
 ## how to use

@@ -21,25 +21,35 @@
                10 FILLER PIC 9(5)V99.
 
        PROCEDURE DIVISION.
+       PERFORM MAIN-PROCEDURE.
+
       *processing the menu input to call functions
        MENU-PROCESS.
-           IF MENU-INPUT = "1" THEN
+           IF MENU-INPUT = "1"
                DISPLAY "1".
+               DISPLAY "(1/4) enter ID:".
+               ACCEPT ITEM-ID.
 
       *display the menu
        MENU-DISPLAY.
            DISPLAY "WAREBALL".
            DISPLAY "inventory done correctly".
-           DISPLAY "".
+           DISPLAY "------------------------".
+           DISPLAY "[1] add item".
+           DISPLAY "[2] update item".
+           DISPLAY "[3] delete item".
+           DISPLAY "[4] generate report".
+           DISPLAY "-".
            DISPLAY "[0] quit program".
-           DISPLAY "".
-           DISPLAY "enter option:"
+           DISPLAY " ".
            ACCEPT MENU-INPUT.
            PERFORM MENU-PROCESS.
 
       *main program loop
-       PERFORM MENU-DISPLAY UNTIL MENU-INPUT = 0.
-       DISPLAY "exiting WAREBALL..."
-       STOP RUN.
-       
+       MAIN-PROCEDURE.
+           PERFORM MENU-DISPLAY UNTIL MENU-INPUT = "0".
+           MOVE "O" TO MENU-INPUT.
+           DISPLAY "exiting WAREBALL..."
+           STOP RUN.
+
        END PROGRAM WAREBALL.
