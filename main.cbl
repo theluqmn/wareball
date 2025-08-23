@@ -2,22 +2,23 @@
        PROGRAM-ID. WAREBALL.
        AUTHOR. theluqmn.
 
-       DATA DIVISION.
-       WORKING-STORAGE SECTION.
-       01 MENU-INPUT PIC X(10).
+       ENVIRONMENT DIVISION.
+       INPUT-OUTPUT SECTION.
+       FILE-CONTROL.
+           SELECT INVENTORY-DATA ASSIGN TO "inventory.dat"
+           ORGANIZATION IS LINE SEQUENTIAL.
 
-       01 ITEM-DATA.
+       DATA DIVISION.
+       FILE SECTION.
+       FD INVENTORY-DATA.
+       01 ITEM-RECORD.
            05 ITEM-ID PIC X(20).
            05 ITEM-DESCRIPTION PIC X(64).
            05 ITEM-QUANTITY PIC 9(5).
            05 ITEM-PRICE PIC 9(5)V99.
-       
-       01 INVENTORY.
-           05 ITEM-DATA OCCURS 100 TIMES.
-               10 FILLER PIC X(20).
-               10 FILLER PIC X(64).
-               10 FILLER PIC 9(5).
-               10 FILLER PIC 9(5)V99.
+
+       WORKING-STORAGE SECTION.
+       01 MENU-INPUT PIC X(10).
 
        PROCEDURE DIVISION.
        DISPLAY "------------------------------------------".
@@ -72,6 +73,15 @@
            ACCEPT ITEM-QUANTITY.
            DISPLAY "(4/4) price:".
            ACCEPT ITEM-PRICE.
+
+           MOVE ITEM-ID TO ITEM-ID OF ITEM-RECORD.
+           MOVE ITEM-DESCRIPTION TO ITEM-DESCRIPTION OF ITEM-RECORD.
+           MOVE ITEM-QUANTITY TO ITEM-QUANTITY OF ITEM-RECORD.
+           MOVE ITEM-PRICE TO ITEM-PRICE OF ITEM-RECORD.
+
+           OPEN EXTEND INVENTORY-DATA.
+           WRITE ITEM-RECORD.
+           CLOSE INVENTORY-DATA.
 
            DISPLAY " ".
            DISPLAY "item added successfully".

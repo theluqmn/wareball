@@ -10,7 +10,7 @@ inventory done correctly
 > this project is still a work-in-progress
 
 - [x] user-friendly command line interface
-- [ ] add a new item
+- [x] add a new item
 - [ ] update item
 - [ ] delete item
 - [ ] generate reports
