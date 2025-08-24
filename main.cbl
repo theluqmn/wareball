@@ -15,19 +15,16 @@
        FILE SECTION.
        FD INVENTORY-FILE.
        01 INVENTORY-RECORD.
-           05 ITEM-ID PIC X(20).
-           05 ITEM-DESCRIPTION PIC X(64).
-           05 ITEM-QUANTITY PIC 9(5).
+           05 ITEM-ID PIC X(10).
+           05 ITEM-DESCRIPTION PIC X(20).
+           05 ITEM-QUANTITY PIC 9(8).
            05 ITEM-PRICE PIC 9(5)V99.
 
        WORKING-STORAGE SECTION.
        01 MENU-INPUT PIC X(10).
        01 FILE-STATUS PIC XX.
 
-      *PROCEDURE DIVISION.
-      *OPEN OUTPUT INVENTORY-FILE.
-      *CLOSE INVENTORY-FILE.       
-
+       PROCEDURE DIVISION.
        DISPLAY "------------------------------------------".
        DISPLAY "WAREBALL".
        DISPLAY " ".
@@ -38,6 +35,8 @@
        MENU-PROCESS.
            IF MENU-INPUT = "help" THEN
                PERFORM MENU-HELP
+           ELSE IF MENU-INPUT = "setup" THEN
+               PERFORM MENU-SETUP
            ELSE IF MENU-INPUT = "exit" THEN
                PERFORM MAIN-EXIT
            ELSE IF MENU-INPUT = "add" THEN
@@ -57,6 +56,15 @@
            ACCEPT MENU-INPUT.
            PERFORM MENU-PROCESS.
        
+       MENU-SETUP.
+           DISPLAY "------------------------------------------".
+           DISPLAY "SETUP WAREBALL".
+
+           OPEN OUTPUT INVENTORY-FILE.
+           CLOSE INVENTORY-FILE.
+           DISPLAY "(1/1) inventory file created".
+           DISPLAY "setup complete".
+
        MENU-HELP.
            DISPLAY "------------------------------------------".
            DISPLAY "LIST OF COMMANDS".
@@ -66,6 +74,7 @@
            DISPLAY "[delete]   delete an item".
            DISPLAY "[report]   generate a report".
            DISPLAY "-".
+           DISPLAY "[setup]    setup wareball".
            DISPLAY "[exit]     exit the wareball CLI".
 
        OPERATION-ADD.
@@ -115,18 +124,30 @@
            DISPLAY "GENERATE A NEW REPORT".
            DISPLAY " ".
 
+           DISPLAY "ITEM ID    |"
+           " DESCRIPTION          |"
+           " QUANTITY |"
+           " PRICE".
+           DISPLAY "-----------|"
+           "----------------------|"
+           "----------|"
+           "--------"
+
            OPEN INPUT INVENTORY-FILE
            PERFORM UNTIL FILE-STATUS NOT = '00'
                READ INVENTORY-FILE next
                    AT END MOVE '99' TO FILE-STATUS
                NOT AT END
-                   DISPLAY 'ID:' ITEM-ID
-                   DISPLAY 'DESCRIPTION:' ITEM-DESCRIPTION
-                   DISPLAY 'QUANTITY:' ITEM-QUANTITY
-                   DISPLAY 'PRICE:' ITEM-PRICE
+                   DISPLAY
+                   ITEM-ID " | "
+                   ITEM-DESCRIPTION " | "
+                   ITEM-QUANTITY " | "
+                   ITEM-PRICE
                END-READ
            END-PERFORM
            CLOSE INVENTORY-FILE.
+
+           DISPLAY " ".
 
        MAIN-PROCEDURE.
            PERFORM MENU-DISPLAY UNTIL MENU-INPUT = "0".
