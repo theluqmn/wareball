@@ -7,9 +7,10 @@
        FILE-CONTROL.
            SELECT INVENTORY-FILE ASSIGN TO "inventory"
            ORGANISATION IS INDEXED
-           ACCESS IS RANDOM
-           RECORD KEY IS ITEM-ID.
-           
+           ACCESS IS DYNAMIC
+           RECORD KEY IS ITEM-ID
+           FILE STATUS IS FILE-STATUS.
+
        DATA DIVISION.
        FILE SECTION.
        FD INVENTORY-FILE.
@@ -21,10 +22,11 @@
 
        WORKING-STORAGE SECTION.
        01 MENU-INPUT PIC X(10).
+       01 FILE-STATUS PIC XX.
 
-       PROCEDURE DIVISION.
-       OPEN OUTPUT INVENTORY-FILE.
-       CLOSE INVENTORY-FILE.       
+      *PROCEDURE DIVISION.
+      *OPEN OUTPUT INVENTORY-FILE.
+      *CLOSE INVENTORY-FILE.       
 
        DISPLAY "------------------------------------------".
        DISPLAY "WAREBALL".
@@ -112,6 +114,19 @@
            DISPLAY "------------------------------------------".
            DISPLAY "GENERATE A NEW REPORT".
            DISPLAY " ".
+
+           OPEN INPUT INVENTORY-FILE
+           PERFORM UNTIL FILE-STATUS NOT = '00'
+               READ INVENTORY-FILE next
+                   AT END MOVE '99' TO FILE-STATUS
+               NOT AT END
+                   DISPLAY 'ID:' ITEM-ID
+                   DISPLAY 'DESCRIPTION:' ITEM-DESCRIPTION
+                   DISPLAY 'QUANTITY:' ITEM-QUANTITY
+                   DISPLAY 'PRICE:' ITEM-PRICE
+               END-READ
+           END-PERFORM
+           CLOSE INVENTORY-FILE.
 
        MAIN-PROCEDURE.
            PERFORM MENU-DISPLAY UNTIL MENU-INPUT = "0".
