@@ -38,7 +38,7 @@ this program is written in cobol and is compiled using `gnucobol`. it is a simpl
 
 ### database design
 
-`ITEM(id PRIMARY KEY TEXT, description TEXT, quantity INT, price FLOAT)`
+`INVENTORY(item-id PRIMARY KEY TEXT, item-description TEXT, item-quantity INT, item-price FLOAT)`
 
 ## extras
 

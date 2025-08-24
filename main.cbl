@@ -4,11 +4,16 @@
 
        ENVIRONMENT DIVISION.
        INPUT-OUTPUT SECTION.
-
+       FILE-CONTROL.
+           SELECT INVENTORY-FILE ASSIGN TO "inventory"
+           ORGANISATION IS INDEXED
+           ACCESS IS RANDOM
+           RECORD KEY IS ITEM-ID.
+           
        DATA DIVISION.
        FILE SECTION.
-       FD INVENTORY-DATA.
-       01 ITEM-RECORD.
+       FD INVENTORY-FILE.
+       01 INVENTORY-RECORD.
            05 ITEM-ID PIC X(20).
            05 ITEM-DESCRIPTION PIC X(64).
            05 ITEM-QUANTITY PIC 9(5).
@@ -18,6 +23,9 @@
        01 MENU-INPUT PIC X(10).
 
        PROCEDURE DIVISION.
+       OPEN OUTPUT INVENTORY-FILE.
+       CLOSE INVENTORY-FILE.       
+
        DISPLAY "------------------------------------------".
        DISPLAY "WAREBALL".
        DISPLAY " ".
@@ -70,6 +78,10 @@
            ACCEPT ITEM-QUANTITY.
            DISPLAY "(4/4) price:".
            ACCEPT ITEM-PRICE.
+
+           OPEN I-O INVENTORY-FILE.
+           WRITE INVENTORY-RECORD.
+           CLOSE INVENTORY-FILE.
 
            DISPLAY " ".
            DISPLAY "item added successfully".
