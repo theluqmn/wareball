@@ -9,18 +9,18 @@ inventory done correctly
 > [!NOTE]
 > this project is barebones. thank you
 
-- [x] user-friendly command line interface
-- [x] add a new item
-- [x] update item
-- [x] delete item
-- [x] generate reports
+- user-friendly command line interface
+- add a new item
+- update item
+- delete item
+- generate reports
 
 ## how to use
 
 > [!WARNING]
 > the release only offers an executable compiled for Ubuntu. if you are not on the same distro or operating system, please refer to the [compiling it yourself](#compiling-it-yourself) guide.
 
-1. go to [releases](https://github.com/theluqmn/wareball/releases), download the latest release.
+1. go to [releases](https://github.com/theluqmn/wareball/releases/latest), download the latest release.
 2. navigate to the directory of the executable and simply run `./main`.
 
 ### compiling it yourself
