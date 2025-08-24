@@ -23,6 +23,7 @@
        WORKING-STORAGE SECTION.
        01 MENU-INPUT PIC X(10).
        01 FILE-STATUS PIC XX.
+       01 WS-ITEM-ID PIC X(10).
        01 WS-ITEM-QUANTITY PIC 9(8).
 
        PROCEDURE DIVISION.
@@ -125,10 +126,16 @@
            DISPLAY "DELETE AN ITEM".
            DISPLAY " ".
            DISPLAY "ID:".
-           ACCEPT ITEM-ID.
+           ACCEPT WS-ITEM-ID.
 
+           OPEN I-O INVENTORY-FILE.
            DISPLAY " ".
-           DISPLAY "item deleted successfully".
+           MOVE WS-ITEM-ID TO ITEM-ID.
+           DELETE INVENTORY-FILE
+               INVALID KEY DISPLAY "item not found"
+               NOT INVALID KEY DISPLAY "item deleted successfully"
+           END-DELETE.
+           CLOSE INVENTORY-FILE.
        
        OPERATION-REPORT.
            DISPLAY "------------------------------------------".

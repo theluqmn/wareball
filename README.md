@@ -7,13 +7,13 @@ inventory done correctly
 ## features
 
 > [!NOTE]
-> this project is still a work-in-progress
+> this project is barebones. thank you
 
 - [x] user-friendly command line interface
 - [x] add a new item
-- [ ] update item
-- [ ] delete item
-- [ ] generate reports
+- [x] update item
+- [x] delete item
+- [x] generate reports
 
 ## how to use
 
