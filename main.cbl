@@ -23,6 +23,7 @@
        WORKING-STORAGE SECTION.
        01 MENU-INPUT PIC X(10).
        01 FILE-STATUS PIC XX.
+       01 WS-ITEM-QUANTITY PIC 9(8).
 
        PROCEDURE DIVISION.
        DISPLAY "------------------------------------------".
@@ -59,6 +60,7 @@
        MENU-SETUP.
            DISPLAY "------------------------------------------".
            DISPLAY "SETUP WAREBALL".
+           DISPLAY " ".
 
            OPEN OUTPUT INVENTORY-FILE.
            CLOSE INVENTORY-FILE.
@@ -90,7 +92,7 @@
            DISPLAY "(4/4) price:".
            ACCEPT ITEM-PRICE.
 
-           OPEN I-O INVENTORY-FILE.
+           OPEN OUTPUT INVENTORY-FILE.
            WRITE INVENTORY-RECORD.
            CLOSE INVENTORY-FILE.
 
@@ -104,10 +106,19 @@
            DISPLAY "(1/2) ID:".
            ACCEPT ITEM-ID.
            DISPLAY "(2/2) quantity:".
-           ACCEPT ITEM-QUANTITY.
+           ACCEPT WS-ITEM-QUANTITY.
 
            DISPLAY " ".
-           DISPLAY "item updated successfully".
+           OPEN I-O INVENTORY-FILE.
+           READ INVENTORY-FILE KEY IS ITEM-ID
+               INVALID KEY
+                   DISPLAY "Item not found."
+               NOT INVALID KEY
+                   MOVE WS-ITEM-QUANTITY TO ITEM-QUANTITY
+                   REWRITE INVENTORY-RECORD
+                   DISPLAY "Item updated successfully."
+           END-READ.
+           CLOSE INVENTORY-FILE.
        
        OPERATION-DELETE.
            DISPLAY "------------------------------------------".
@@ -121,7 +132,7 @@
        
        OPERATION-REPORT.
            DISPLAY "------------------------------------------".
-           DISPLAY "GENERATE A NEW REPORT".
+           DISPLAY "INVENTORY REPORT".
            DISPLAY " ".
 
            DISPLAY "ITEM ID    |"
@@ -131,7 +142,7 @@
            DISPLAY "-----------|"
            "----------------------|"
            "----------|"
-           "--------"
+           "----------".
 
            OPEN INPUT INVENTORY-FILE
            PERFORM UNTIL FILE-STATUS NOT = '00'
