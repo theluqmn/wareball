@@ -94,7 +94,7 @@
            DISPLAY "(4/4) price:".
            ACCEPT ITEM-PRICE.
 
-           OPEN OUTPUT INVENTORY-FILE.
+           OPEN I-O INVENTORY-FILE.
            WRITE INVENTORY-RECORD.
            CLOSE INVENTORY-FILE.
 
