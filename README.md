@@ -34,7 +34,11 @@ the following are the steps for Ubuntu.
 
 ## how this works
 
-this program is written in cobol and is compiled using `gnucobol`. it is a simple CLI-based program, which manages item inventory. data is written to a `.dat` file.
+this program is written in cobol and is compiled using `gnucobol`. it is a simple CLI-based program, where users can add, update or delete items in an inventory management system, as well as generate a report of the items.
+
+### database design
+
+`ITEM(id PRIMARY KEY TEXT, description TEXT, quantity INT, price FLOAT)`
 
 ## extras
 
