@@ -25,6 +25,7 @@
        01 FILE-STATUS PIC XX.
        01 WS-ITEM-ID PIC X(10).
        01 WS-ITEM-QUANTITY PIC 9(8).
+       01 COUNTER PIC 9(3).
 
        PROCEDURE DIVISION.
        DISPLAY "------------------------------------------".
@@ -142,21 +143,28 @@
            DISPLAY "INVENTORY REPORT".
            DISPLAY " ".
 
-           DISPLAY "ITEM ID    |"
+           DISPLAY 
+           "NUM |"
+           " ITEM ID    |"
            " DESCRIPTION          |"
            " QUANTITY |"
            " PRICE".
-           DISPLAY "-----------|"
+           DISPLAY "----|"
+           "------------|"
            "----------------------|"
            "----------|"
            "----------".
+
+           MOVE 0 TO COUNTER.
 
            OPEN INPUT INVENTORY-FILE
            PERFORM UNTIL FILE-STATUS NOT = '00'
                READ INVENTORY-FILE next
                    AT END MOVE '99' TO FILE-STATUS
                NOT AT END
+                   ADD 1 TO COUNTER
                    DISPLAY
+                   COUNTER " | "
                    ITEM-ID " | "
                    ITEM-DESCRIPTION " | "
                    ITEM-QUANTITY " | "
