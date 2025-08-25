@@ -86,13 +86,13 @@
            DISPLAY "------------------------------------------".
            DISPLAY "ADD A NEW ITEM".
            DISPLAY " ".
-           DISPLAY "(1/4) ID:".
+           DISPLAY "(1/4) ID: " WITH NO ADVANCING.
            ACCEPT ITEM-ID.
-           DISPLAY "(2/4) description:".
+           DISPLAY "(2/4) description: " WITH NO ADVANCING.
            ACCEPT ITEM-DESCRIPTION.
-           DISPLAY "(3/4) quantity:".
+           DISPLAY "(3/4) quantity: " WITH NO ADVANCING.
            ACCEPT ITEM-QUANTITY.
-           DISPLAY "(4/4) price:".
+           DISPLAY "(4/4) price: " WITH NO ADVANCING.
            ACCEPT ITEM-PRICE.
 
            OPEN I-O INVENTORY-FILE.
@@ -106,9 +106,9 @@
            DISPLAY "------------------------------------------".
            DISPLAY "UPDATE AN ITEM".
            DISPLAY " ".
-           DISPLAY "(1/2) ID:".
+           DISPLAY "(1/2) ID: " WITH NO ADVANCING.
            ACCEPT ITEM-ID.
-           DISPLAY "(2/2) quantity:".
+           DISPLAY "(2/2) quantity: " WITH NO ADVANCING.
            ACCEPT WS-ITEM-QUANTITY.
 
            DISPLAY " ".
@@ -127,7 +127,7 @@
            DISPLAY "------------------------------------------".
            DISPLAY "DELETE AN ITEM".
            DISPLAY " ".
-           DISPLAY "ID:".
+           DISPLAY "ID: " WITH NO ADVANCING.
            ACCEPT WS-ITEM-ID.
 
            OPEN I-O INVENTORY-FILE.
