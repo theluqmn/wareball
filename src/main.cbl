@@ -56,6 +56,7 @@
 
        MENU-DISPLAY.
            DISPLAY "------------------------------------------".
+           DISPLAY "> " WITH NO ADVANCING.
            ACCEPT MENU-INPUT.
            PERFORM MENU-PROCESS.
        
@@ -174,6 +175,7 @@
            CLOSE INVENTORY-FILE.
 
            DISPLAY " ".
+           DISPLAY "total: " COUNTER.
 
        MAIN-PROCEDURE.
            PERFORM MENU-DISPLAY UNTIL MENU-INPUT = "0".
