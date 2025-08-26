@@ -26,6 +26,7 @@
        01 WS-ITEM-ID PIC X(10).
        01 WS-ITEM-QUANTITY PIC 9(8).
        01 COUNTER PIC 9(3).
+       01 TEMPSTR-A PIC X(10).
 
        PROCEDURE DIVISION.
        DISPLAY "------------------------------------------".
@@ -36,6 +37,8 @@
        PERFORM MAIN-PROCEDURE.
 
        MENU-PROCESS.
+           MOVE FUNCTION LOWER-CASE(TEMPSTR-A) TO MENU-INPUT.
+
            IF MENU-INPUT = "help" THEN
                PERFORM MENU-HELP
            ELSE IF MENU-INPUT = "setup" THEN
@@ -53,13 +56,11 @@
            ELSE
                DISPLAY "[!] unknown command entered."
            END-IF.
-
        MENU-DISPLAY.
            DISPLAY "------------------------------------------".
            DISPLAY "> " WITH NO ADVANCING.
-           ACCEPT MENU-INPUT.
+           ACCEPT TEMPSTR-A.
            PERFORM MENU-PROCESS.
-       
        MENU-SETUP.
            DISPLAY "------------------------------------------".
            DISPLAY "SETUP WAREBALL".
@@ -69,7 +70,6 @@
            CLOSE INVENTORY-FILE.
            DISPLAY "(1/1) inventory file created".
            DISPLAY "setup complete".
-
        MENU-HELP.
            DISPLAY "------------------------------------------".
            DISPLAY "LIST OF COMMANDS".
@@ -81,7 +81,6 @@
            DISPLAY "-".
            DISPLAY "[setup]    setup wareball".
            DISPLAY "[exit]     exit the wareball CLI".
-
        OPERATION-ADD.
            DISPLAY "------------------------------------------".
            DISPLAY "ADD A NEW ITEM".
@@ -101,7 +100,6 @@
 
            DISPLAY " ".
            DISPLAY "item added successfully".
-       
        OPERATION-UPDATE.
            DISPLAY "------------------------------------------".
            DISPLAY "UPDATE AN ITEM".
@@ -122,7 +120,6 @@
                    DISPLAY "Item updated successfully."
            END-READ.
            CLOSE INVENTORY-FILE.
-       
        OPERATION-DELETE.
            DISPLAY "------------------------------------------".
            DISPLAY "DELETE AN ITEM".
@@ -138,7 +135,6 @@
                NOT INVALID KEY DISPLAY "item deleted successfully"
            END-DELETE.
            CLOSE INVENTORY-FILE.
-       
        OPERATION-REPORT.
            DISPLAY "------------------------------------------".
            DISPLAY "INVENTORY REPORT".
@@ -176,10 +172,8 @@
 
            DISPLAY " ".
            DISPLAY "total: " COUNTER.
-
        MAIN-PROCEDURE.
            PERFORM MENU-DISPLAY UNTIL MENU-INPUT = "0".
-       
        MAIN-EXIT.
            DISPLAY "[!] exiting WAREBALL..."
            STOP RUN.
